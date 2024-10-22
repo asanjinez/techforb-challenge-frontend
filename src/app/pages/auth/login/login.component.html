@@ -1,1 +1,77 @@
-<p>login works!</p>
+<div class=" d-flex justify-content-center align-items-center vh-100">
+    <div class="row box-area">
+       <!--  -->
+        <div class="col-md-6 d-none d-md-flex justify-content-center align-items-center flex-column left-box text-left">
+            <div class="text-container">
+                <h2 class="responsive-title">Iniciar sesión</h2>
+                <p class="responsive-text">
+                    Nos alegra tenerte de vuelta y estamos listos para atender tus necesidades. Inicia sesión y continúa aprovechando al máximo nuestra plataforma.
+                </p>
+                <div class="items mt-4 text-left">
+                    <ul class="list-unstyled">
+                        <li class="d-flex align-items-center mb-3">
+                            <mat-icon aria-hidden="false" aria-label="monitoreo" fontIcon="person"></mat-icon>
+                            <div class="ms-2">
+                                <p class="text-white item-title">Monitoreo general</p>
+                                <p class="text-white item-description">Administra y monitorea múltiples plantas de forma centralizada.</p>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-center mb-3">
+                            <mat-icon aria-hidden="false" aria-label="estrella" fontIcon="star"></mat-icon>
+                            <div class="ms-2">
+                                <p class="text-white item-title">Notificaciones en tiempo real</p>
+                                <p class="text-white item-description">Recibí notificaciones en tiempo real sobre las mediciones.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--  -->
+        <div class="col-md-6 right-box">
+            <div class="form-container">
+                <div class="mb-4 ">
+                    <h2>Portal de Monitoreo</h2>
+                    <p>Iniciar Sesión.</p>
+                </div>
+                <form [formGroup]="loginForm">
+                    <mat-form-field class="w-100">
+                        <mat-label>Email</mat-label>
+                        <input matInput
+                               placeholder="pat@example.com"
+                               (blur)="updateErrorMessage()"
+                               required
+                               formControlName="email"
+                               >
+                        @if (this.loginForm.controls.email.invalid) {
+                          <mat-error>{{errorMessage}}</mat-error>
+                        }
+                      </mat-form-field>
+    
+                      <mat-form-field class="w-100">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput 
+                               [type]="hidePassword ? 'password' : 'text'"
+                               formControlName="password"
+                               >
+                        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                      </mat-form-field>
+    
+                    <div class="input-group mb-3 d-flex justify-content-between buttons-form">
+                        <a href="#">¿Olvidaste tu contraseña?</a>
+                        <button (click)="login()" mat-raised-button color="primary" class="btn w-50 fs-6 rounded-3 p-4" >Iniciar Sesión</button>
+                    </div>
+                </form>
+            </div>
+        </div> 
+    </div>
+</div>
+
+<h2 mat-dialog-title>Dialog with elements</h2>
+<mat-dialog-content>This dialog showcases the title, close, content and actions elements.</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

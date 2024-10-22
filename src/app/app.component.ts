@@ -3,14 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { MaterialModule } from './material.module';
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
     MaterialModule,
-    DashboardComponent
+    DashboardComponent,
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
