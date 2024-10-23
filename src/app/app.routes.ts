@@ -8,6 +8,10 @@ export const routes: Routes = [
     {
         path: 'dashboard',
         loadChildren: () => import('./pages/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)
+    },
+    {
+        path: '**',
+        loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent)
     }
 
 ];

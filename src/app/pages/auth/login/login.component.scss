@@ -1,11 +1,13 @@
 .box-area {
   width: 100%;
   height: 100%;
-  background-color: #016159;
+  background-color: #027462;
 }
 
 .left-box {
   background-image: url('../../../../assets/images/conexiones-banner.jpg');
+  background-size: cover; 
+  background-position: center; 
   color: #dfdcdc; 
   padding: 20px; 
   display: flex;
@@ -15,28 +17,41 @@
 }
 
 .text-container {
-  width: 75%; 
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  width: 50%; 
 }
 
 .responsive-title {
-  font-size: 3.5vw; 
+  font-size: 3.5vw;
 }
 
 .responsive-text {
-  font-size: 1.6vw; 
+  font-weight: 500;
+  font-size: 1vw;
+  margin-bottom: 0;
 }
 
-
+.items {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 .item-title {
-  font-size: 1.3vw; 
+  font-weight: 600;
+  font-size: 1vw;
+  margin-bottom: 0;
 }
 
 .item-description {
-  font-size: 0.9vw; 
+  font-weight: 300;
+  font-size: 1vw;
+  margin-bottom: 0;
 }
 
 .items li mat-icon {
-  font-size: 2vw; 
+  font-size: 1vw;
 }
 
 
