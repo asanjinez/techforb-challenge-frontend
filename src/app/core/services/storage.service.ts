@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Usuario } from '../models/usuario';
-
+import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,12 +9,13 @@ export class StorageService {
   isUserLogged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   currentUser: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>({id: 0, nombre: '', apellido: '', avatar: ''}); 
 
-  constructor() {
+  constructor(private cookiesService: CookieService) {
     // Aca deberia estar reconstruyendo y validando el token en caso de volver a cargar la pagina o cerrar y abrir el navegador
     let token = this.obtenerTokenPrevio();
     let usuario = this.obtenerUsuarioPrevio();
   
     if (this.tokenValido(token)) {
+      console.log('Se recupero una session valida');
       this.isUserLogged = new BehaviorSubject<boolean>(true);
       this.currentUser = new BehaviorSubject<Usuario>(usuario);
     } else {
@@ -23,24 +24,26 @@ export class StorageService {
   }
 
   limpiarSession() {
-    localStorage.clear();
+    this.cookiesService.delete('token');
+    this.cookiesService.delete('usuario');
     this.isUserLogged.next(false);
     this.currentUser.next({id: 0, nombre: '', apellido: '', avatar: ''}); 
   }
 
   guardarSession(token: String, usuario: Usuario) {
-    localStorage.setItem('token', JSON.stringify(token));
-    localStorage.setItem('usuario', JSON.stringify(usuario));
+    this.cookiesService.set('token', token.toString());
+    this.cookiesService.set('usuario', JSON.stringify(usuario));
     this.isUserLogged.next(true);
     this.currentUser.next(usuario);
   }
 
   obtenerUsuarioPrevio(): Usuario {
-    return JSON.parse(localStorage.getItem('usuario') || '{}');
+    let usuario = this.cookiesService.get('usuario');
+    return usuario ? JSON.parse(usuario) : {id: 0, nombre: '', apellido: '', avatar: ''};
   }
 
   obtenerTokenPrevio(): string {
-    return localStorage.getItem('token') || '';
+    return this.cookiesService.get('token') || '';
   }
 
   estaLogueado(): boolean {
