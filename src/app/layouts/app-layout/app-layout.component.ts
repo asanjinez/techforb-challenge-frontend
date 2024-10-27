@@ -18,6 +18,12 @@ export class AppLayoutComponent implements AfterViewInit {
   sidenav!: MatSidenav;
   isMobile= false;
   navActivado = false;
+  menuItems = [
+    { name: 'Dashboard', fragment: 'home', 'icon':'public'  },
+    { name: 'Monitoreo global', fragment: 'monitoreo', 'icon':'videocam' },
+    { name: 'Plantas', fragment: 'plantas', 'icon':'villa' },
+    { name: 'Parametros', fragment: 'parametros', 'icon':'wifi_tethering' },
+  ];
 
 
   constructor(private observer: BreakpointObserver, private authService: AuthService, private router:Router) {}
@@ -31,7 +37,7 @@ export class AppLayoutComponent implements AfterViewInit {
         this.sidenav.close();
       } else {
         this.navActivado = true;
-        this.sidenav.open(); // Solo íconos en escritorio
+        this.sidenav.open();
       }
     });
   }
