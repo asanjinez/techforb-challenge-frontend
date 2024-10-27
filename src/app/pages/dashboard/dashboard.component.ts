@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../../core/services/storage.service';
 import { Usuario } from '../../core/models/usuario';
-import { NavbarComponent } from '../../modules/components/navbar/navbar.component';
 import { MonitoreoComponent } from "../../modules/components/monitoreo/monitoreo.component";
 import { PlantasComponent } from '../../modules/components/plantas/plantas.component';
 import { ParametrosComponent } from '../../modules/components/parametros/parametros.component';
@@ -9,7 +8,7 @@ import { ParametrosComponent } from '../../modules/components/parametros/paramet
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NavbarComponent, MonitoreoComponent, ParametrosComponent, PlantasComponent],
+  imports: [MonitoreoComponent, ParametrosComponent, PlantasComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
