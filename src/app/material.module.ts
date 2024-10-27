@@ -10,8 +10,12 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
-import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -33,6 +37,10 @@ import { MatMenuModule } from '@angular/material/menu';
     AsyncPipe,
     MatGridListModule,
     MatMenuModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }

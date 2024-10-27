@@ -1,0 +1,10 @@
+<div class="dialogContainer">
+    <h1 mat-dialog-title>¿Estas seguro?</h1>
+    <div mat-dialog-content>
+        <p>Se eliminará el registro para siempre</p>
+        <div class="botones">
+            <button mat-button (click)="cerrar()"> Cancelar</button>
+            <button class="btn btn-danger" (click)="confirmar()" type="submit">Confirmar</button>
+        </div>
+    </div>
+</div>

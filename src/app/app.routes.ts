@@ -46,6 +46,10 @@ export const routes: Routes = [
         loadComponent: () => import('./modules/components/monitoreo/monitoreo.component').then(m => m.MonitoreoComponent)   
     },
     {
+        path: 'plantas',
+        loadComponent: () => import('./modules/components/plantas/plantas.component').then(m => m.PlantasComponent)
+    },
+    {
         path: '**',
         loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent)
     },

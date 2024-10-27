@@ -1,1 +1,60 @@
-<p>plantas works!</p>
+<div class="table-container">
+  <div class="table-title">
+    <div>Plantas</div>
+    <button mat-raised-button (click)="openCreateDialog()" >+ Crear nueva planta</button>
+  </div>
+  <mat-divider></mat-divider>
+  <!-- cual es la etiqueta para poner una linea de separacion  -->
+  <div class="mat-elevation-z0">
+    <mat-table [dataSource]="dataSource" matSort>
+      <!-- País Column -->
+      <ng-container matColumnDef="pais">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> País </mat-header-cell>
+        <mat-cell *matCellDef="let planta"> {{ planta.pais }} </mat-cell>
+      </ng-container>
+
+      <!-- Nombre Column -->
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let planta"> {{ planta.nombre }} </mat-cell>
+      </ng-container>
+
+      <!-- Número de Lecturas Column -->
+      <ng-container matColumnDef="numeroLecturas">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Número de lecturas </mat-header-cell>
+        <mat-cell *matCellDef="let planta"> {{ planta.numeroLecturas }} </mat-cell>
+      </ng-container>
+
+      <!-- Alertas Medias Column -->
+      <ng-container matColumnDef="alertasMedias">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Alertas medias </mat-header-cell>
+        <mat-cell *matCellDef="let planta"> {{ planta.numeroAlertasMedias }} </mat-cell>
+      </ng-container>
+
+      <!-- Alertas Rojas Column -->
+      <ng-container matColumnDef="alertasRojas">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Alertas rojas </mat-header-cell>
+        <mat-cell *matCellDef="let planta"> {{ planta.numeroAlertasRojas }} </mat-cell>
+      </ng-container>
+
+      <!-- Acciones Column -->
+      <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        <mat-cell *matCellDef="let planta">       
+          <button mat-icon-button aria-label ="acciones" [matMenuTriggerFor]="menu" #menuTrigger>
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openEditDialog(planta)" >Editar</button>
+            <button mat-menu-item (click)="openDeleteDialog(planta)">Eliminar</button>
+          </mat-menu>
+      </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let planta; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

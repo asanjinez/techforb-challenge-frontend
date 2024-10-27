@@ -1,0 +1,29 @@
+.dialogContainer{
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.dialogTitle{
+    font-size: 14px;
+    font-weight: 500;
+    // background-color: red;
+    margin: 20px;
+}
+
+.botones{
+    text-align: center;
+    button{
+        margin: 10px;
+    }
+
+    #buttonCancel{
+        background-color: white;
+        border: #33A3AA 1px solid;
+        color: #33A3AA;
+    }
+
+    #buttonSave{
+        background-color: #33A3AA;
+        color: white;
+    }
+}
