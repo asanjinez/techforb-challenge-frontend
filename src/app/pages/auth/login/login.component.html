@@ -1,26 +1,29 @@
-<div class=" d-flex justify-content-center align-items-center vh-100">
+<div class="d-flex justify-content-center align-items-center vh-100">
     <div class="row box-area">
-       <!--  -->
-        <div class="col-md-6 d-none d-md-flex justify-content-center align-items-center flex-column left-box text-left">
+        <div class="col-md-6  justify-content-center align-items-center flex-column left-box">
             <div class="text-container">
-                <h2 class="responsive-title">Iniciar sesión</h2>
+                <h1 class="responsive-title">Iniciar sesión</h1>
                 <p class="responsive-text">
                     Nos alegra tenerte de vuelta y estamos listos para atender tus necesidades. Inicia sesión y continúa aprovechando al máximo nuestra plataforma.
                 </p>
-                <div class="items mt-4 text-left">
+                <div class="mt-4">
                     <ul class="list-unstyled">
                         <li class="d-flex align-items-center mb-3">
-                            <mat-icon aria-hidden="false" aria-label="monitoreo" fontIcon="person"></mat-icon>
-                            <div class="ms-2">
-                                <p class="text-white item-title">Monitoreo general</p>
-                                <p class="text-white item-description">Administra y monitorea múltiples plantas de forma centralizada.</p>
+                            <div class="item">
+                                <mat-icon aria-hidden="false" fontIcon="dynamic_form" style="width: 40px; height: 40px;"></mat-icon>
+                                <div class="item-text">
+                                    <p class="text-white item-title">Monitoreo general</p>
+                                    <p class="text-white item-description">Administra, monitorea mutiples plantas de forma centralizada.</p>
+                                </div>
                             </div>
                         </li>
                         <li class="d-flex align-items-center mb-3">
-                            <mat-icon aria-hidden="false" aria-label="estrella" fontIcon="star"></mat-icon>
-                            <div class="ms-2">
+                            <div class="item">
+                            <mat-icon aria-hidden="false" aria-label="estrella" fontIcon="stars" style="width: 40px; height: 40px;"></mat-icon>
+                            <div class="item-text">
                                 <p class="text-white item-title">Notificaciones en tiempo real</p>
-                                <p class="text-white item-description">Recibí notificaciones en tiempo real sobre las mediciones.</p>
+                                <p class="text-white item-description">Recibi notificaciones en tiempo real sobre las mediciones.</p>
+                            </div>
                             </div>
                         </li>
                     </ul>
@@ -32,8 +35,8 @@
         <div class="col-md-6 right-box">
             <div class="form-container">
                 <div class="mb-4 ">
-                    <h2>Portal de Monitoreo</h2>
-                    <p>Iniciar Sesión.</p>
+                    <h1 style="font-size: 36px; font-weight: 600;">Portal de Monitoreo</h1>
+                    <p style="font-size: 25px; font-weight: 500;">Iniciar Sesión.</p>
                 </div>
                 <form [formGroup]="loginForm">
                     <mat-form-field class="w-100">
@@ -62,8 +65,12 @@
     
                     <div class="input-group mb-3 d-flex justify-content-between buttons-form">
                         <a href="#">¿Olvidaste tu contraseña?</a>
-                        <button (click)="login()" mat-raised-button color="primary" class="btn w-50 fs-6 rounded-3 p-4" >Iniciar Sesión</button>
+                        <button (click)="login()" mat-raised-button class="btn fs-6 rounded-3"  style="background-color: #33A3AA; color: white; width: 200px; padding: 25px;">Iniciar Sesión</button>
                     </div>
+                    <span style="color: #84818A;">Protegido por reCAPTCHA y sujeto a la 
+                        <a style="color: #33A3AA;" href="#">Politica de
+                        Privacidad</a> y <a style="color: #33A3AA;" href="#">Condiciones.</a>
+                    </span>
                 </form>
             </div>
         </div> 

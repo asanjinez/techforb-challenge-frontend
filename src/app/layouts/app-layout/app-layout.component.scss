@@ -1,0 +1,47 @@
+.toolbar-container {
+    color: #C1C1C1;
+    height: 64px;
+    display: flex; 
+    justify-content: space-between;
+  }
+
+mat-toolbar{
+    position:fixed;
+    top:0;
+    z-index: 2;
+}
+
+mat-sidenav-container {
+    height:100%;
+}
+
+mat-sidenav {
+    background-color: #F5F5F5;
+    padding-top: 3.5rem;
+    transition: width 0.3s ease;
+
+    .box-menu{
+        color: #a3a1a1;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding:0.75rem;
+    }
+  }
+
+mat-sidenav-content{
+    padding-top: 4rem;
+    @media screen and (min-width: 600px) {
+        padding-top: 4rem;
+    }
+}
+
+@media (min-width: 800px){
+    .toolbar-container{
+        display: none;
+    }
+  }
+
+.expanded {
+    width: 250px;   
+}

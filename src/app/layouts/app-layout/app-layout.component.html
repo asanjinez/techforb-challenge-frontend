@@ -1,0 +1,61 @@
+<mat-toolbar class="toolbar-container">
+    <button mat-icon-button (click)="togleMenu()" aria-label="Open menu">
+        <mat-icon>landscape</mat-icon>
+    </button>
+    <mat-icon>person</mat-icon>
+    <mat-icon>notifications</mat-icon>
+  </mat-toolbar>
+  
+    <mat-sidenav-container autosize="true" >
+      <mat-sidenav [ngClass]="!navActivado ? 'expanded' : ''" [mode]="isMobile ? 'over' : 'side'" [disableClose]="isMobile ? 'false' : 'true'">
+        <mat-nav-list style="margin-top: 50px;">
+          <a mat-list-item (click)="navigateTo('start')">
+              <span class="box-menu">
+                <mat-icon>public</mat-icon>
+                <span *ngIf="isMobile">Dashboard</span>
+              </span>
+            </a>
+        </mat-nav-list>
+  
+        <mat-nav-list>
+          <a mat-list-item (click)="navigateTo('monitoreo')">
+              <span class="box-menu">
+                <mat-icon>videocam</mat-icon>
+                <span *ngIf="isMobile">Monitoreo global</span>
+              </span>
+          </a>
+        </mat-nav-list>
+  
+        <mat-nav-list>
+          <a mat-list-item (click)="navigateTo('plantas')">
+              <span class="box-menu">
+                <mat-icon>villa</mat-icon>
+                <span *ngIf="isMobile">Plantas</span>
+              </span>
+          </a>
+        </mat-nav-list>
+  
+        <mat-nav-list>
+          <a mat-list-item (click)="navigateTo('parametros')">
+              <span class="box-menu">
+                <mat-icon>wifi_tethering</mat-icon>
+                <span *ngIf="isMobile">Parametros</span>
+              </span>
+          </a>
+        </mat-nav-list>
+  
+        <mat-nav-list>
+          <a mat-list-item (click)="logout()">
+              <span class="box-menu">
+                <mat-icon>logout</mat-icon>
+                <span *ngIf="isMobile">Cerrar sesion</span>
+              </span>
+          </a>
+        </mat-nav-list>
+  
+  
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
