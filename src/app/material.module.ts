@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,6 +10,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
+import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [],
@@ -21,8 +23,6 @@ import {MatListModule} from '@angular/material/list';
     MatInputModule, 
     FormsModule, 
     ReactiveFormsModule,
-    MatFormFieldModule, 
-    MatInputModule, 
     MatButtonModule, 
     MatIconModule,
     MatCardModule,
@@ -30,6 +30,9 @@ import {MatListModule} from '@angular/material/list';
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
+    AsyncPipe,
+    MatGridListModule,
+    MatMenuModule,
   ]
 })
 export class MaterialModule { }

@@ -23,7 +23,7 @@ export const routes: Routes = [
     },
     {
         path: 'dashboard',
-        canActivateChild: [authGuard],
+        canActivateChild: [],
         component: AppLayoutComponent,
         loadChildren: () => import('./pages/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)
     },
@@ -38,7 +38,15 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'dash',
+        loadComponent: () => import('./dash/dash.component').then(m => m.DashComponent)
+    },
+    {
+        path: 'monitoreo',
+        loadComponent: () => import('./modules/components/monitoreo/monitoreo.component').then(m => m.MonitoreoComponent)   
+    },
+    {
         path: '**',
         loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent)
-    }
+    },
 ];
