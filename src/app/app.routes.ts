@@ -50,6 +50,10 @@ export const routes: Routes = [
         loadComponent: () => import('./modules/components/plantas/plantas.component').then(m => m.PlantasComponent)
     },
     {
+        path: 'parametros',
+        loadComponent: () => import('./modules/components/parametros/parametros.component').then(m => m.ParametrosComponent)
+    },
+    {
         path: '**',
         loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent)
     },

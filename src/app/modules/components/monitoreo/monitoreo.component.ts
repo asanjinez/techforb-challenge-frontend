@@ -25,17 +25,17 @@ export class MonitoreoComponent implements OnInit{
     map(({ matches }) => {
       if (matches) {
         return [
-          { title: 'Lecturas Ok', cols: 4, rows: 1, icon: 'check', cantidad: this.lecturasOk, color: 'rgba(235, 248, 249, 0.5)' }, // #EBF8F9
-          { title: 'Alertas medias', cols: 4, rows: 1, icon: 'priority_high', cantidad: this.alertasMedias, color: 'rgba(253, 207, 87, 0.5)' }, // #FDCF57
-          { title: 'Alertas rojas', cols: 4, rows: 1, icon: 'warning', cantidad: this.alertasRojas, color: 'rgba(246, 150, 129, 0.5)' }, // #F69681
-          { title: 'Sensores deshabilitados', cols: 4, rows: 1, icon: 'close', cantidad: this.sensoresDeshabilitados, color: 'rgba(250, 218, 188, 0.5)' }  // #FADABC
+          { title: 'Lecturas Ok', cols: 4, rows: 1, icon: 'check', cantidad: this.lecturasOk, color: 'rgba(235, 248, 249, 0.5)' }, 
+          { title: 'Alertas medias', cols: 4, rows: 1, icon: 'priority_high', cantidad: this.alertasMedias, color: 'rgba(253, 207, 87, 0.5)' }, 
+          { title: 'Alertas rojas', cols: 4, rows: 1, icon: 'warning', cantidad: this.alertasRojas, color: 'rgba(246, 150, 129, 0.5)' }, 
+          { title: 'Sensores deshabilitados', cols: 4, rows: 1, icon: 'close', cantidad: this.sensoresDeshabilitados, color: 'rgba(250, 218, 188, 0.5)' }
         ];
       } else {
         return [
-          { title: 'Lecturas Ok', cols: 1, rows: 1, icon: 'check', cantidad: this.lecturasOk, color: 'rgba(235, 248, 249, 0.5)' }, // #EBF8F9
-          { title: 'Alertas medias', cols: 1, rows: 1, icon: 'priority_high', cantidad: this.alertasMedias, color: 'rgba(253, 207, 87, 0.5)' }, // #FDCF57
-          { title: 'Alertas rojas', cols: 1, rows: 1, icon: 'warning', cantidad: this.alertasRojas, color: 'rgba(246, 150, 129, 0.5)' }, // #F69681
-          { title: 'Sensores deshabilitados', cols: 1, rows: 1, icon: 'close', cantidad: this.sensoresDeshabilitados, color: 'rgba(250, 218, 188, 0.5)' }  // #FADABC
+          { title: 'Lecturas Ok', cols: 1, rows: 1, icon: 'check', cantidad: this.lecturasOk, color: 'rgba(235, 248, 249, 0.5)' }, 
+          { title: 'Alertas medias', cols: 1, rows: 1, icon: 'priority_high', cantidad: this.alertasMedias, color: 'rgba(253, 207, 87, 0.5)' }, 
+          { title: 'Alertas rojas', cols: 1, rows: 1, icon: 'warning', cantidad: this.alertasRojas, color: 'rgba(246, 150, 129, 0.5)' }, 
+          { title: 'Sensores deshabilitados', cols: 1, rows: 1, icon: 'close', cantidad: this.sensoresDeshabilitados, color: 'rgba(250, 218, 188, 0.5)' }
         ];
       }
     })

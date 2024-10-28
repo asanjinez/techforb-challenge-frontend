@@ -1,0 +1,55 @@
+.container {
+
+}
+.grid-container{
+}
+
+.dashboard-card {
+    box-shadow: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 20px;
+    width: 350px;
+    height: 90px;
+    border-radius: 15px;
+}
+
+.card-content{
+    margin: 20px;
+    mat-card-title{
+    color: #8E8EA1;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: left;
+}
+
+    mat-card-content{
+        font-size: 20px;
+        font-weight: 700;
+        text-align: left;
+    }
+}
+
+.card-icono{
+    margin-right: 20px;
+}
+
+
+
+mat-icon{
+    border-radius: 50%;
+}
+
+.parametro-text{
+margin: auto;
+color: #8E8EA1;
+font-size: 12px;
+}
+
+.iconos-parametros{
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}

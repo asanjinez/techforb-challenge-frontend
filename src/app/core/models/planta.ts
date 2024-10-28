@@ -1,3 +1,5 @@
+import { Parametros } from "./parametros";
+
 export interface Planta {
     id: number;
     nombre: string;
@@ -6,4 +8,5 @@ export interface Planta {
     numeroAlertasMedias: number;
     numeroAlertasRojas: number;
     sensoresDeshabilitados: number;
+    parametros: Parametros;
 }
