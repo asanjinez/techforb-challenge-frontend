@@ -47,7 +47,16 @@ export class StorageService {
   }
 
   estaLogueado(): boolean {
-    return this.isUserLogged.value;
+    console.log('Se esta validando si el usuario esta logueado');
+    console.log('Usuario en cookie: ' + this.cookiesService.get('usuario'));
+    console.log('Token en cookie: ' + this.cookiesService.get('token'));
+    console.log('Usuario en BehaviorSubject: ' + this.currentUser.value);
+    
+    
+    
+    let final = this.cookiesService.get('usuario') != '' && this.cookiesService.get('token')!='' && this.isUserLogged.value;
+    
+    return final;
   }
 
   obtenerUsuario(): Usuario {
@@ -56,6 +65,9 @@ export class StorageService {
 
   tokenValido(token: string): boolean {
     let decodedToken = this.decodificarToken(token);
+    let valor = new Date() <= new Date(decodedToken.exp * 1000)
+    console.log('session exporada: ' + valor);
+    
     return decodedToken && (new Date() <= new Date(decodedToken.exp * 1000));
   }
 

@@ -1,7 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { MaterialModule } from '../../../material.module';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { map } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { PlantasService } from '../../../core/services/plantas.service';
 import { Planta } from '../../../core/models/planta';
 import { CommonModule } from '@angular/common';
@@ -15,43 +15,39 @@ import { CommonModule } from '@angular/common';
 })
 export class MonitoreoComponent implements OnInit{
   private breakpointObserver = inject(BreakpointObserver);
-  
-  lecturasOk = 0;
-  alertasMedias = 0;
-  alertasRojas = 0;
-  sensoresDeshabilitados = 0;
-
-  cards = this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall]).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Lecturas Ok', cols: 4, rows: 1, icon: 'check', cantidad: this.lecturasOk, color: 'rgba(235, 248, 249, 0.5)' }, 
-          { title: 'Alertas medias', cols: 4, rows: 1, icon: 'priority_high', cantidad: this.alertasMedias, color: 'rgba(253, 207, 87, 0.5)' }, 
-          { title: 'Alertas rojas', cols: 4, rows: 1, icon: 'warning', cantidad: this.alertasRojas, color: 'rgba(246, 150, 129, 0.5)' }, 
-          { title: 'Sensores deshabilitados', cols: 4, rows: 1, icon: 'close', cantidad: this.sensoresDeshabilitados, color: 'rgba(250, 218, 188, 0.5)' }
-        ];
-      } else {
-        return [
-          { title: 'Lecturas Ok', cols: 1, rows: 1, icon: 'check', cantidad: this.lecturasOk, color: 'rgba(235, 248, 249, 0.5)' }, 
-          { title: 'Alertas medias', cols: 1, rows: 1, icon: 'priority_high', cantidad: this.alertasMedias, color: 'rgba(253, 207, 87, 0.5)' }, 
-          { title: 'Alertas rojas', cols: 1, rows: 1, icon: 'warning', cantidad: this.alertasRojas, color: 'rgba(246, 150, 129, 0.5)' }, 
-          { title: 'Sensores deshabilitados', cols: 1, rows: 1, icon: 'close', cantidad: this.sensoresDeshabilitados, color: 'rgba(250, 218, 188, 0.5)' }
-        ];
-      }
-    })
-  );
+  cards = new BehaviorSubject<any[]>([])
+  private plantas: Planta[] = [];
 
   constructor(private plantasService: PlantasService) { }
   ngOnInit(): void {
+    // Obtener plantas primero
     this.plantasService.getPlantas().subscribe(response => {
       if (response.success && response.data) {
-        let plantas:Planta[] = response.data;
-        this.lecturasOk = this.obtenerCantidadLecturasOk(plantas);
-        this.alertasMedias = this.obtenerCantidadAlertasMedias(plantas);
-        this.alertasRojas = this.obtenerCantidadAlertasRojas(plantas);
-        this.sensoresDeshabilitados = this.obtenerCantidadSensoresDeshabilitados(plantas);;
+        this.plantas = response.data;
+        let isMobile = this.breakpointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall]);
+        this.actualizarEstadisticas(isMobile);
       }
     });
+
+    this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe(({ matches }) => {
+      this.actualizarEstadisticas(matches);
+    });
+  }
+
+  actualizarEstadisticas(isDesktop:boolean = false): void {
+    let lecturasOk = this.obtenerCantidadLecturasOk(this.plantas);
+    let alertasMedias = this.obtenerCantidadAlertasMedias(this.plantas);
+    let alertasRojas = this.obtenerCantidadAlertasRojas(this.plantas);
+    let sensoresDeshabilitados = this.obtenerCantidadSensoresDeshabilitados(this.plantas);
+    
+    this.cards.next([
+      { title: 'Lecturas Ok', cols: isDesktop ? 4 : 1, rows: 1, icon: 'check', cantidad: lecturasOk, color: 'rgba(235, 248, 249, 0.5)' },
+      { title: 'Alertas medias', cols: isDesktop ? 4 : 1, rows: 1, icon: 'priority_high', cantidad: alertasMedias, color: 'rgba(253, 207, 87, 0.5)' },
+      { title: 'Alertas rojas', cols: isDesktop ? 4 : 1, rows: 1, icon: 'warning', cantidad: alertasRojas, color: 'rgba(246, 150, 129, 0.5)' },
+      { title: 'Sensores deshabilitados', cols: isDesktop ? 4 : 1, rows: 1, icon: 'close', cantidad: sensoresDeshabilitados, color: 'rgba(250, 218, 188, 0.5)' }
+    ]);
+
+
   }
 
   obtenerCantidadLecturasOk(plantas: Planta[]): number {

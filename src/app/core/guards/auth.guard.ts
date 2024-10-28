@@ -8,12 +8,14 @@ export const authGuard: CanActivateFn = (route, state) => {
   let toastr: any = inject(ToastrService)
 
   let isAuth = false
-  if (authService.estaLogueado()){
-    console.log('Usuario logueado');
+  isAuth = authService.estaLogueado();
+  if (isAuth) {
+    // alert("Atencion, esto dio true")
     
     return true;
 
   }
+  // alert("Atencion, esto dio false, despues de esto procede a desloguear ")
   console.log('Usuario no logueado');
   toastr.error('No tienes permisos para acceder a esta página', 'Acceso denegado');
   authService.logout();

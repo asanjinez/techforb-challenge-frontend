@@ -5,9 +5,6 @@ import { merge, Subject, takeUntil } from 'rxjs';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import { NgIf } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/services/auth.service';
 import { LoginRequest } from '../../../core/models/auth/loginRequest';
 import { ResponseAlertManagerService } from '../../../core/services/response-alert-manager.service';
@@ -33,9 +30,6 @@ export class LoginComponent {
   });
 
   constructor(private formBuilder: FormBuilder, 
-              private router: Router,
-              private dialog: MatDialog,
-              private toastr: ToastrService,
               private authService: AuthService,
               private responseAlertManager: ResponseAlertManagerService
             ) {

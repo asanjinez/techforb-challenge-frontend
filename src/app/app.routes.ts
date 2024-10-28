@@ -23,7 +23,7 @@ export const routes: Routes = [
     },
     {
         path: 'dashboard',
-        canActivateChild: [],
+        canActivateChild: [authGuard],
         component: AppLayoutComponent,
         loadChildren: () => import('./pages/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)
     },
@@ -36,22 +36,6 @@ export const routes: Routes = [
         path: 'register',
         redirectTo: 'auth/register',
         pathMatch: 'full'
-    },
-    {
-        path: 'dash',
-        loadComponent: () => import('./dash/dash.component').then(m => m.DashComponent)
-    },
-    {
-        path: 'monitoreo',
-        loadComponent: () => import('./modules/components/monitoreo/monitoreo.component').then(m => m.MonitoreoComponent)   
-    },
-    {
-        path: 'plantas',
-        loadComponent: () => import('./modules/components/plantas/plantas.component').then(m => m.PlantasComponent)
-    },
-    {
-        path: 'parametros',
-        loadComponent: () => import('./modules/components/parametros/parametros.component').then(m => m.ParametrosComponent)
     },
     {
         path: '**',

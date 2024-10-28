@@ -1,8 +1,7 @@
 <div class="grid-container">
     <mat-grid-list cols="4" rowHeight="200px">
-      @for (card of cards | async; track card) {
-        <mat-grid-tile [colspan]="card.cols" [rowspan]="card.rows">
-          <mat-card class="dashboard-card">
+      <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+        <mat-card class="dashboard-card">
             <div class="card-content">
                 <mat-card-header>
                     <mat-card-title>
@@ -19,7 +18,6 @@
             
           </mat-card>
         </mat-grid-tile>
-      }
     </mat-grid-list>
   </div>
   

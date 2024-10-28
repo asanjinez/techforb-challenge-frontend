@@ -8,6 +8,7 @@ import { RegisterRequest } from '../models/auth/registerRequest';
 import { Usuario } from '../models/usuario';
 import { StorageService } from './storage.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private storageService: StorageService, private router:Router) { }
+  constructor(private http: HttpClient, private storageService: StorageService, private router:Router, private toastr: ToastrService) { }
   login(loginRequest: LoginRequest): Observable<ApiResponse<LoginResponse>> {
     return this.http.post<ApiResponse<LoginResponse>>('http://localhost:8080/api/auth/login', loginRequest).pipe(
       tap (response => {
@@ -32,11 +33,15 @@ export class AuthService {
 
   logout() {
     this.storageService.limpiarSession();
+    this.toastr.error('Sesión cerrada correctamente');
     this.router.navigate(['/login']);
   }
 
   estaLogueado(): boolean {
-    return this.storageService.estaLogueado();
+    let usuario = this.storageService.estaLogueado();
+    console.log("intente loguear a alguien y di: " + usuario);	
+    
+    return usuario;
   }
 
   obtenerUsuario(): Usuario {
