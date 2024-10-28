@@ -1,12 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpInterceptorFn } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
+import { HttpInterceptorFn } from '@angular/common/http';
 
 
 export const AuthInterceptor: HttpInterceptorFn = (req,next) =>{
-    let cookiesService: CookieService = inject(CookieService);
-    let token = cookiesService.get('token');
+    let token = localStorage.getItem('token');
 
     if (token) {
         let modifiedReq = req.clone({

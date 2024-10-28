@@ -47,4 +47,8 @@ export class AuthService {
   obtenerUsuario(): Usuario {
     return this.storageService.obtenerUsuario();
   }
+
+  validarToken(token: string): Observable<ApiResponse<Usuario>> {
+    return this.http.post<ApiResponse<Usuario>>('http://localhost:8080/api/auth/validateToken', {token});
+  }
 }

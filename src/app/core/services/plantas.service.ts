@@ -15,7 +15,7 @@ import { Observable, of, tap } from "rxjs";
     }
 
     deletePlanta(id: number): Observable<ApiResponse<Planta>> {
-        return this.http.delete<ApiResponse<Planta>>(`http://localhost:8080/api/plantas/${id}`);
+        return this.http.delete<ApiResponse<Planta>>(`http://localhost:8080/api/plantas/delete/${id}`);
     }
 
     createPlanta(planta: Planta): Observable<ApiResponse<Planta>> {
@@ -23,7 +23,7 @@ import { Observable, of, tap } from "rxjs";
     }
 
     editPlanta(planta: Planta): Observable<ApiResponse<Planta>> {
-        return this.http.put<ApiResponse<Planta>>(`http://localhost:8080/api/plantas/${planta.id}`, planta);
+        return this.http.put<ApiResponse<Planta>>(`http://localhost:8080/api/plantas/edit/${planta.id}`, planta);
     }
     
   }

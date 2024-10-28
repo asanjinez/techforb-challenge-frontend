@@ -11,10 +11,10 @@
                         </mat-card-title>
                       </mat-card-header>
                       <mat-card-content class="">
-                        <div class="iconos-parametros">
-                            <mat-icon class="card-icono" style="margin: auto; width: 100;" [ngStyle]="{'background-color': card.color}">check</mat-icon> <span class="parametro-text">{{card.cantidad}}</span>
-                            <mat-icon class="card-icono" style="margin: auto; width: 100;" [ngStyle]="{'background-color': card.color}">priority_high</mat-icon> <span class="parametro-text">{{card.cantidad}}</span>
-                            <mat-icon class="card-icono" style="margin: auto; width: 100;" [ngStyle]="{'background-color': card.color}">warning</mat-icon> <span class="parametro-text">{{card.cantidad}}</span>
+                        <div class="iconos-parametros" [ngStyle]="{'background-color': card.color}">
+                            <mat-icon class="card-icono" style="margin: auto; width: 100;">check</mat-icon> <span class="parametro-text">{{card.cantidad}}</span>
+                            <mat-icon class="card-icono" style="margin: auto; width: 100;">priority_high</mat-icon> <span class="parametro-text">{{card.cantidad}}</span>
+                            <mat-icon class="card-icono" style="margin: auto; width: 100;">warning</mat-icon> <span class="parametro-text">{{card.cantidad}}</span>
                         </div>
                       </mat-card-content>
                 </div>

@@ -1,8 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MaterialModule } from '../../../../material.module';
 import { CommonModule } from '@angular/common';
+import { PlantasService } from '../../../../core/services/plantas.service';
+import { Planta } from '../../../../core/models/planta';
+import { ResponseAlertManagerService } from '../../../../core/services/response-alert-manager.service';
 
 @Component({
   selector: 'app-dialog-planta',
@@ -12,6 +15,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './dialog-planta.component.scss'
 })
 export class DialogPlantaComponent implements OnInit {
+  errorMessage: string = '';
   plantaForm: FormGroup;
   editMode: boolean = false;
   elements: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -19,11 +23,13 @@ export class DialogPlantaComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<DialogPlantaComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private plantasService: PlantasService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private managerResponse: ResponseAlertManagerService
   ) {
     this.plantaForm = this.fb.group({
-      id: [{value: '', disabled: this.editMode}],
-      pais: [ { value: '', disabled: this.editMode }],
+      id: ['',],
+      pais: [''],
       nombre: [''],
       numeroLecturas: [''],
       numeroAlertasMedias: [''],
@@ -35,10 +41,12 @@ export class DialogPlantaComponent implements OnInit {
 
   ngOnInit(): void {
     this.editMode = this.data.editMode;
+    this.applyValidators();
+    
     if (this.editMode){
+      this.plantaForm.patchValue(this.data.data);
       this.plantaForm.get('nombre')?.disable();
       this.plantaForm.get('pais')?.disable();
-      this.plantaForm.patchValue(this.data.data);
     } else {
       this.plantaForm.reset();
       this.plantaForm.get('nombre')?.enable();
@@ -50,17 +58,63 @@ export class DialogPlantaComponent implements OnInit {
   }
   save(): void {
     if (this.plantaForm.valid) {
-      let formData = this.plantaForm.value;
+      let plantaSeleccionada:Planta = this.plantaForm.value;
+      
       if (this.editMode) {
-        // Lógica para el caso de edición
-        formData.id = this.data.planta.id; // Incluye el ID para la actualización
+        plantaSeleccionada.id = this.data.data.id;
+        plantaSeleccionada.nombre = this.data.data.nombre;
+        plantaSeleccionada.pais = this.data.data.pais;
+
+        this.plantasService.editPlanta(plantaSeleccionada).subscribe({
+          next: (response) => {
+            this.managerResponse.manageSuccessResponseAlert(response);
+            this.dialogRef.close(response.data);
+          },
+          error: (error) => {
+            this.managerResponse.manageErrorResponseAlert(error);
+            this.dialogRef.close({}); 
+          }
+        });
+      } else {
+        this.plantasService.createPlanta(plantaSeleccionada).subscribe({
+          next: (response) => {
+            this.managerResponse.manageSuccessResponseAlert(response);
+            this.dialogRef.close(response.data); // Cerramos el diálogo y pasamos los datos de la nueva planta
+          },
+          error: (error) => {
+            this.managerResponse.manageErrorResponseAlert(error);
+            this.dialogRef.close({}); 
+          }
+        });
       }
-      this.dialogRef.close(formData); // Retorna los datos al componente que abrió el diálogo
+    } else {
+      console.warn('El formulario no es válido');
+    }
+}
+
+  updateErrorMessage(campo:string):void {
+    if (this.plantaForm.controls[campo].hasError('required')) {
+      this.errorMessage = 'Debes ingresar un ' + campo;
+    } else {
+      this.errorMessage = '';
     }
   }
-
   cancel():void{
     this.dialogRef.close();
+  }
+
+  applyValidators() {
+    if (this.editMode) {
+      this.plantaForm.get('numeroLecturas')?.setValidators(Validators.required);
+      this.plantaForm.get('numeroAlertasMedias')?.setValidators(Validators.required);
+      this.plantaForm.get('numeroAlertasRojas')?.setValidators(Validators.required);
+      this.plantaForm.get('sensoresDeshabilitados')?.setValidators(Validators.required);
+
+    } else {
+      this.plantaForm.get('pais')?.clearValidators();
+      this.plantaForm.get('nombre')?.clearValidators();
+    }
+    this.plantaForm.updateValueAndValidity();
   }
 
 }

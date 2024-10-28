@@ -11,50 +11,64 @@
             <mat-grid-tile [colspan]="editMode ? 1 : 2" rowspan="1">
                 <mat-form-field appearance="fill" style="width: 100%;">
                 <mat-label>Nombre</mat-label>
-                <input matInput formControlName="nombre" [attr.disabled]="!editMode" placeholder="Nombre"/>
+                <input matInput formControlName="nombre" [attr.disabled]="!editMode" placeholder="Nombre" (blur)="updateErrorMessage('nombre')" required/>
+                @if (this.plantaForm.controls['nombre'].invalid) {
+                    <mat-error>{{errorMessage}}</mat-error>
+                  }
                 </mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="editMode ? 1 : 2" rowspan="1">
                 <mat-form-field appearance="fill" style="width: 100%;">
                 <mat-label>País</mat-label>
-                <input matInput formControlName="pais" [attr.disabled]="!editMode"placeholder="País"/>
+                <input matInput formControlName="pais" [attr.disabled]="!editMode"placeholder="País" (blur)="updateErrorMessage('pais')" required/>
+                @if (this.plantaForm.controls['pais'].invalid) {
+                    <mat-error>{{errorMessage}}</mat-error>
+                  }
                 </mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile *ngIf="editMode" colspan="1" rowspan="1">
                 <mat-form-field appearance="fill" style="width: 100%;">
                 <mat-label>Cantidad de lecturas</mat-label>
-                <input matInput formControlName="numeroLecturas" type="number" placeholder="Cantidad de lecturas"/>
-                </mat-form-field>
+                <input matInput formControlName="numeroLecturas" type="number" placeholder="Cantidad de lecturas" (blur)="updateErrorMessage('numeroLecturas')" required/>
+                @if (this.plantaForm.controls['numeroLecturas'].invalid) {
+                    <mat-error>{{errorMessage}}</mat-error>
+                  }</mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile *ngIf="editMode" colspan="1" rowspan="1">
                 <mat-form-field appearance="fill" style="width: 100%;">
                 <mat-label>Alertas medias</mat-label>
-                <input matInput formControlName="numeroAlertasMedias" type="number" placeholder="Alertas medias"/>
-                </mat-form-field>
+                <input matInput formControlName="numeroAlertasMedias" type="number" placeholder="Alertas medias" (blur)="updateErrorMessage('numeroAlertasMedias')" required/>
+                @if (this.plantaForm.controls['numeroAlertasMedias'].invalid) {
+                    <mat-error>{{errorMessage}}</mat-error>
+                  }</mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile *ngIf="editMode" colspan="1" rowspan="1">
                 <mat-form-field appearance="fill" style="width: 100%;">
                 <mat-label>Alertas rojas</mat-label>
-                <input formControlName="numeroAlertasRojas" type="number" matInput placeholder="Alertas rojas"/>
-                </mat-form-field>
+                <input formControlName="numeroAlertasRojas" type="number" matInput placeholder="Alertas rojas"(blur)="updateErrorMessage('numeroAlertasRojas')" required/>
+                @if (this.plantaForm.controls['numeroAlertasRojas'].invalid) {
+                    <mat-error>{{errorMessage}}</mat-error>
+                  }</mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile *ngIf="editMode" colspan="1" rowspan="1">
                 <mat-form-field appearance="fill" style="width: 100%;">
                 <mat-label>Sensores deshabilitados</mat-label>
-                <input formControlName="sensoresDeshabilitados" type="number" matInput placeholder="Sensores deshabilitados"/>
-                </mat-form-field>
+                <input formControlName="sensoresDeshabilitados" type="number" matInput placeholder="Sensores deshabilitados"(blur)="updateErrorMessage('sensoresDeshabilitados')" required/>
+                @if (this.plantaForm.controls['sensoresDeshabilitados'].invalid) {
+                    <mat-error>{{errorMessage}}</mat-error>
+                  }</mat-form-field>
             </mat-grid-tile>
   
         </mat-grid-list>
   
         <div class="botones">
             <button id="buttonCancel" mat-button [mat-dialog-close]="{}">Cancelar</button>
-            <button id="buttonSave" (click)="save()" mat-raised-button color="primary" type="submit">Guardar</button>
+            <button id="buttonSave" (click)="save()" mat-raised-button color="primary" type="submit" [disabled]="!plantaForm.valid">Guardar</button>
         </div>
       </form>
     </mat-card-content>
