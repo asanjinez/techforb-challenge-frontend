@@ -65,7 +65,7 @@
     
                     <div class="input-group mb-3 d-flex justify-content-between buttons-form">
                         <a href="#">¿Olvidaste tu contraseña?</a>
-                        <button (click)="login()" mat-raised-button class="btn fs-6 rounded-3"  style="background-color: #33A3AA; color: white; width: 200px; padding: 25px;">Iniciar Sesión</button>
+                        <button [disabled]="!loginForm.valid" (click)="login()" mat-raised-button class="btn fs-6 rounded-3"  style="background-color: #33A3AA; color: white; width: 200px; padding: 25px;">Iniciar Sesión</button>
                     </div>
                     <span style="color: #84818A;">Protegido por reCAPTCHA y sujeto a la 
                         <a style="color: #33A3AA;" href="#">Politica de
