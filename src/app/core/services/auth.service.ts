@@ -9,16 +9,18 @@ import { Usuario } from '../models/usuario';
 import { StorageService } from './storage.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { enviroment } from '../../../enviroments';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private baseUrl = enviroment.baseApiUrl + '/auth';
 
   constructor(private http: HttpClient, private storageService: StorageService, private router:Router, private toastr: ToastrService) { }
   login(loginRequest: LoginRequest): Observable<ApiResponse<LoginResponse>> {
-    return this.http.post<ApiResponse<LoginResponse>>('http://localhost:8080/api/auth/login', loginRequest).pipe(
+    return this.http.post<ApiResponse<LoginResponse>>(this.baseUrl + '/login', loginRequest).pipe(
       tap (response => {
         if (response.data?.token && response.data?.usuario)
         this.storageService.guardarSession(response.data.token, response.data.usuario);
@@ -28,7 +30,7 @@ export class AuthService {
   }
 
   register(RegisterRequest: RegisterRequest): Observable<ApiResponse<String>> {
-    return this.http.post<ApiResponse<String>>('http://localhost:8080/api/auth/register', RegisterRequest);
+    return this.http.post<ApiResponse<String>>(this.baseUrl + '/register', RegisterRequest);
   }
 
   logout() {
