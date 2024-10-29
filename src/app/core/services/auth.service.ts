@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginRequest } from '../models/auth/loginRequest';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ApiResponse } from '../models/apiResponse';
 import { LoginResponse } from '../models/auth/loginResponse';
 import { RegisterRequest } from '../models/auth/registerRequest';
@@ -41,7 +41,6 @@ export class AuthService {
 
   estaLogueado(): boolean {
     let usuario = this.storageService.estaLogueado();
-    console.log("intente loguear a alguien y di: " + usuario);	
     
     return usuario;
   }
@@ -52,5 +51,9 @@ export class AuthService {
 
   validarToken(token: string): Observable<ApiResponse<Usuario>> {
     return this.http.post<ApiResponse<Usuario>>('http://localhost:8080/api/auth/validateToken', {token});
+  }
+
+  validarEmail(loginRequest: LoginRequest): Observable<ApiResponse<boolean>> {
+    return this.http.post<ApiResponse<boolean>>(this.baseUrl + '/validarEmail', loginRequest);
   }
 }

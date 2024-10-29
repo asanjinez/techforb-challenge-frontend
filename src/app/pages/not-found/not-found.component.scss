@@ -134,11 +134,7 @@
 }
 
 /* demo stuff */
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
+
 
 h1 {
   text-align: center;
@@ -153,7 +149,7 @@ h1 {
 .link-container {
   text-align: center;
 }
-a.more-link {
+button.more-link {
   text-transform: uppercase;
   font-size: 13px;
     background-color: #92a4ad;

@@ -1,1 +1,94 @@
-<p>register works!</p>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+           <div class="row border rounded-5 p-3 bg-white shadow box-area" >
+           <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #582193">
+                <img src="../../../../assets/images/techforb_logo.jpeg" class="img-fluid" style="width: 250px;">
+           </div> 
+            
+           <div class="col-md-6 right-box">
+              <div class="row">
+                    <div style="text-align: center;" >
+                         <h2>Techforb challenge - Monitoreo </h2>
+                         <p>Esta pagina fue diseñada con el proposito de completar el challenge propuesto por Techforb</p>
+                         <p style="color: #582193; font-size: 1rem;">(esta vista no es parte de los requerimientos pero es necesaria)</p>
+                    </div>
+                    
+                    <form [formGroup]="registroForm">
+                        <div class="input-group mb-3">
+                            <!-- Nombre -->
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput type="text" formControlName="nombre" placeholder="Ingrese el nombre" (blur)="updateErrorMessage('nombre')" required>
+                                @if (this.registroForm.controls['nombre'].invalid) {
+                                    <mat-error>{{errorMessage}}</mat-error>
+                                }
+                            </mat-form-field>
+                        </div>
+                    
+                        <div class="input-group mb-3">
+                            <!-- Apellido -->
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Apellido</mat-label>
+                                <input matInput type="text" formControlName="apellido" placeholder="Ingrese el apellido" (blur)="updateErrorMessage('apellido')" required>
+                                @if (this.registroForm.controls['apellido'].invalid) {
+                                    <mat-error>{{errorMessage}}</mat-error>
+                                }
+                            </mat-form-field>
+                        </div>
+                    
+                        <div class="input-group mb-3">
+                            <!-- Avatar -->
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Avatar</mat-label>
+                                <input matInput type="text" formControlName="avatar" placeholder="Ingrese el enlace del avatar" (blur)="updateErrorMessage('avatar')" required>
+                                @if (this.registroForm.controls['avatar'].invalid) {
+                                    <mat-error>{{errorMessage}}</mat-error>
+                                }
+                            </mat-form-field>
+                        </div>
+                    
+                        <div class="input-group mb-3">
+                            <!-- Email -->
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Email</mat-label>
+                                <input (blur)="onEmailChange()" matInput type="email" formControlName="email" placeholder="pat@example.com" (blur)="updateErrorMessage('email')" required>
+                                @if (this.registroForm.controls['email'].hasError('required')) {
+                                    <mat-error>{{errorMessage}}></mat-error>
+                                }
+                                @if (this.registroForm.controls['email'].hasError('email')) {
+                                    <mat-error>Por favor ingrese un correo válido</mat-error>
+                                }
+                                @if (this.emailEnUso) {
+                                    <mat-error>El correo ya está en uso</mat-error>
+                                }
+                            </mat-form-field>
+                        </div>
+                    
+                        <div class="input-group mb-3">
+                            <!-- Contraseña -->
+                            <mat-form-field class="w-100">
+                                <mat-label>Contraseña</mat-label>
+                                <input matInput 
+                                       [type]="hidePassword ? 'password' : 'text'"
+                                       formControlName="password"
+                                       placeholder="Ingrese su contraseña" required>
+                                @if (this.registroForm.controls['password'].hasError('required')) {
+                                    <mat-error>Contraseña es <strong>requerida</strong></mat-error>
+                                }
+                                @if (this.registroForm.controls['password'].hasError('minlength')) {
+                                    <mat-error>La contraseña debe tener al menos 8 caracteres</mat-error>
+                                }
+                                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
+                    </form>
+
+
+                    <div class="input-group mb-3">
+                        <button [disabled]="!registroForm.valid" class="btn btn-lg btn-primary w-100 fs-6" (click)="registrar()">Registrarse</button>
+                    </div>
+              </div>
+           </div> 
+          </div>
+        </div>
