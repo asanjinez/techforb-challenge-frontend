@@ -88,4 +88,8 @@ export class RegisterComponent {
     }
   }
 
+  navLogin(){
+    this.router.navigate(['/auth/login']);
+  }
+
 }

@@ -1,3 +1,3 @@
 export const enviroment = {
-    baseApiUrl: 'techforb-challenge-backend-production.up.railway.app',
+    baseApiUrl: 'https://techforb-challenge-backend-production.up.railway.app',
 }
