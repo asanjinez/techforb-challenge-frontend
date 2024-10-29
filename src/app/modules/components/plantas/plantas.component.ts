@@ -85,7 +85,7 @@ export class PlantasComponent implements OnInit, AfterViewInit{
       autoFocus: true,
       hasBackdrop: true,
     }).afterClosed().subscribe((result) => {
-      if (result) {
+      if (result && result.id) {
         this.plantas = [...this.plantas, result];
         this.dataSource.data = this.plantas;
       }
