@@ -1,3 +1,3 @@
 export const enviroment = {
-    baseApiUrl: 'http://localhost:8080/api',
+    baseApiUrl: 'techforb-challenge-backend-production.up.railway.app',
 }
