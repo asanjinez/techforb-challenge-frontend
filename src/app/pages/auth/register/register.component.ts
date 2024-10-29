@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  errorMessage: string = '';
+  errorMessage: string = 'Este campo es obligatorio';
   emailEnUso: boolean = false;
   registroForm: FormGroup; 
   hidePassword: boolean = true;
@@ -37,14 +37,6 @@ export class RegisterComponent {
     this.registroForm.controls['id'].disable();
   }
 
-  updateErrorMessage(campo:string):void {
-    if (this.registroForm.controls[campo].hasError('required')) {
-      this.errorMessage = 'Debes ingresar un ' + campo;
-    } else {
-      this.errorMessage = '';
-    }
-  }
-
   onEmailChange():void {
     let email:string = this.registroForm.controls['email'].value;
     if (email && this.registroForm.controls['email'].valid) {
@@ -60,7 +52,6 @@ export class RegisterComponent {
           }
         },
         error: (error) => {
-          this.errorMessage = 'No se pudo validar el email, comprueba tu conexión a internet';
           console.log(error);
         }
       });
