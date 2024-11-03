@@ -61,8 +61,6 @@ export class RegisterComponent {
   registrar(){
     if (this.registroForm.valid) {
       let usuario = this.registroForm.value;
-
-      console.log(usuario);
       this.authService.register(usuario).subscribe({
         
         next: (response) => {
@@ -72,6 +70,7 @@ export class RegisterComponent {
         },
         error: (error) => {
           this.manageResponse.manageErrorResponseAlert(error);
+          this.registroForm.reset();
           
           
         }

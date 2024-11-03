@@ -21,12 +21,9 @@ export class MonitoreoComponent implements OnInit{
   constructor(private plantasService: PlantasService) { }
   ngOnInit(): void {
     // Obtener plantas primero
-    this.plantasService.getPlantas().subscribe(response => {
-      if (response.success && response.data) {
-        this.plantas = response.data;
-        let isMobile = this.breakpointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall]);
-        this.actualizarEstadisticas(isMobile);
-      }
+    this.plantasService.lista$.subscribe((plantas) => {
+      this.plantas = plantas;
+      this.actualizarEstadisticas();
     });
 
     this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe(({ matches }) => {

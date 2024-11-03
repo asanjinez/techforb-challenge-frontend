@@ -47,12 +47,8 @@ export class ParametrosComponent implements OnInit {
   constructor (private plantasService: PlantasService) { }
 
   ngOnInit(): void {
-    this.plantasService.getPlantas().subscribe(response => {
-      if (response.success && response.data) {
-        this.plantas = response.data;
-        console.log(this.plantas);
-        
-      }
+    this.plantasService.lista$.subscribe((plantas) => {
+      this.plantas = plantas;
     });
   }
 }

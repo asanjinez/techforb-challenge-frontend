@@ -31,12 +31,9 @@ export class PlantasComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit(): void {
-    this.plantasService.getPlantas().subscribe(response => {
-      if(response.success){
-        this.plantas = response.data!;
-        this.dataSource.data = response.data!; 
-        console.log(this.dataSource);
-      }
+    this.plantasService.lista$.subscribe((plantas) => {
+      this.plantas = plantas;
+      this.dataSource.data = this.plantas;
     });
   
   }
@@ -58,23 +55,13 @@ export class PlantasComponent implements OnInit, AfterViewInit{
       autoFocus: true,
       hasBackdrop: true,
       panelClass: 'dialogContainer'
-    }).afterClosed().subscribe((result) => {
-      if (result) {
-        this.plantas = this.plantas.map(p => p.id === result.id ? result : p);
-        this.dataSource.data = this.plantas;
-      }
     });
   }
 
   openDeleteDialog(planta: Planta): void {
     this.dialog.open(DialogConfirmComponent,{
       data: {id: planta.id},
-    }).afterClosed().subscribe((result) => {
-      if (result) {
-        this.plantas = this.plantas.filter(p => p.id !== planta.id);
-        this.dataSource.data = this.plantas;
-      }
-    });
+    })
   }
 
   openCreateDialog(): void {
@@ -84,11 +71,6 @@ export class PlantasComponent implements OnInit, AfterViewInit{
       data: {data: {}, editMode: false},
       autoFocus: true,
       hasBackdrop: true,
-    }).afterClosed().subscribe((result) => {
-      if (result && result.id) {
-        this.plantas = [...this.plantas, result];
-        this.dataSource.data = this.plantas;
-      }
     });
   }
 }

@@ -53,8 +53,6 @@ export class DialogPlantaComponent implements OnInit {
       this.plantaForm.get('pais')?.enable();
     }
 
-    console.log(this.plantaForm);
-
   }
   save(): void {
     if (this.plantaForm.valid) {

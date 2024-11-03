@@ -4,6 +4,7 @@ import { Usuario } from '../../core/models/usuario';
 import { MonitoreoComponent } from "../../modules/components/monitoreo/monitoreo.component";
 import { PlantasComponent } from '../../modules/components/plantas/plantas.component';
 import { ParametrosComponent } from '../../modules/components/parametros/parametros.component';
+import { PlantasService } from '../../core/services/plantas.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,7 @@ import { ParametrosComponent } from '../../modules/components/parametros/paramet
 export class DashboardComponent implements OnInit{
   estaLogueado: boolean = false;
   usuarioActual: Usuario|null = null;
-  constructor(private storageService: StorageService ) {}
+  constructor(private storageService: StorageService, private plantasService: PlantasService ) {}
 
   ngOnInit() {
     this.storageService.isUserLogged.subscribe(isLogged => {
@@ -25,6 +26,9 @@ export class DashboardComponent implements OnInit{
     this.storageService.currentUser.subscribe(user => {
       this.usuarioActual = user;
     });
+
+    this.plantasService.loadPlantas();
+    
   }
 
 }
