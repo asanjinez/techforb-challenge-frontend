@@ -68,10 +68,10 @@
                         <button [disabled]="!loginForm.valid" (click)="login()" mat-raised-button class="btn fs-6 rounded-3"  style="background-color: #33A3AA; color: white; width: 200px; padding: 25px;">Iniciar Sesión</button>
                     </div>
                     <span style="color: #84818A;">Protegido por reCAPTCHA y sujeto a la 
-                        <a style="color: #33A3AA;" href="#">Politica de
-                        Privacidad</a> y <a style="color: #33A3AA;" href="#">Condiciones.</a><br>
-                        <a style="color: #33A3AA;" href="#" (click)="usuarioTesting()">Usuario testing</a> - 
-                        <a style="color: #33A3AA;" href="#" (click)="register()"> Registro</a>
+                        <a style="text-decoration: underline; cursor: pointer;color: #33A3AA;">Politica de
+                        Privacidad</a> y <a style="text-decoration: underline; cursor: pointer;color: #33A3AA;">Condiciones.</a><br>
+                        <a style="text-decoration: underline; cursor: pointer;color: #33A3AA;" (click)="usuarioTesting()">Usuario testing</a> - 
+                        <a style="text-decoration: underline; cursor: pointer;color: #33A3AA;" (click)="register()"> Registro</a>
                     </span>
                 </form>
             </div>
