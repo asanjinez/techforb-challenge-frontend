@@ -8,6 +8,7 @@ import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { LoginRequest } from '../../../core/models/auth/loginRequest';
 import { ResponseAlertManagerService } from '../../../core/services/response-alert-manager.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ export class LoginComponent {
 
   constructor(private formBuilder: FormBuilder, 
               private authService: AuthService,
-              private responseAlertManager: ResponseAlertManagerService
+              private responseAlertManager: ResponseAlertManagerService,
+              private router: Router
             ) {
     merge(this.loginForm.controls.email.valueChanges, this.loginForm.controls.password.valueChanges)
       .pipe(takeUntilDestroyed())
@@ -50,7 +52,6 @@ export class LoginComponent {
 
   login(){
     if (this.loginForm.valid) {
-      this.openDialog();
       this.authService.login(this.loginForm.value as LoginRequest).pipe(takeUntil(this.destroy$)).subscribe({
         next: (response) => {
           this.responseAlertManager.manageSuccessResponseAlert(response);
@@ -68,8 +69,19 @@ export class LoginComponent {
     
   }
 
-  openDialog() {
-    // this.dialog.open();
+  usuarioTesting() {
+    this.authService.login({email: 'testing@test.com', password: '12345678'}).pipe(takeUntil(this.destroy$)).subscribe({
+      next: (response) => {
+        this.responseAlertManager.manageSuccessResponseAlert(response);
+      },
+      error: (error) => {
+        this.responseAlertManager.manageErrorResponseAlert(error);
+      }
+    });
+  }
+
+  register(){
+    this.router.navigate(['/register']);
   }
   resetForm() {
     this.loginForm.reset();
