@@ -19,15 +19,31 @@
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="editMode ? 1 : 2" rowspan="1">
-                <mat-form-field appearance="fill" style="width: 100%;">
-                <mat-label>País</mat-label>
-                <input matInput formControlName="pais" [attr.disabled]="!editMode"placeholder="País" (blur)="updateErrorMessage('pais')" required/>
-                @if (this.plantaForm.controls['pais'].invalid) {
-                    <mat-error>{{errorMessage}}</mat-error>
-                  }
-                </mat-form-field>
-            </mat-grid-tile>
-
+            <mat-form-field appearance="fill" style="width: 100%;">
+              <input type="text"
+                      placeholder="Elige un pais"
+                      matInput
+                      [attr.disabled]="!editMode" 
+                      formControlName="pais" 
+                      name="pais" 
+                      (blur)="updateErrorMessage('pais')" 
+                      required
+                      [value]="plantaForm.controls['pais'].value?.name"
+                      [matAutocomplete]="auto"
+                      >
+              <mat-autocomplete #auto="matAutocomplete">
+                @for (country of filteredCountries | async; track country) {
+                  <mat-option [value]="country">    
+                    <img [src]="country.image" alt="{{country.code}}" width="30" style="margin-right: 8px;">
+                    {{country.name}}
+                  </mat-option>
+                }
+              </mat-autocomplete>
+              @if (this.plantaForm.controls['pais'].invalid) {
+                <mat-error>{{errorMessage}}</mat-error>
+              }
+            </mat-form-field>
+          </mat-grid-tile>
             <mat-grid-tile *ngIf="editMode" colspan="1" rowspan="1">
                 <mat-form-field appearance="fill" style="width: 100%;">
                 <mat-label>Cantidad de lecturas</mat-label>

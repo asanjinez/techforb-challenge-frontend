@@ -36,7 +36,6 @@ export class ParametrosComponent implements OnInit {
   ngOnInit(): void {
     this.plantasService.lista$.subscribe((plantas) => {
       this.plantas = plantas;
-      console.log(this.conteos);
       
       this.calcularParametros(); 
     });

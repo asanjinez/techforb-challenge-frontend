@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { PlantasService } from '../../../../core/services/plantas.service';
 import { Planta } from '../../../../core/models/planta';
 import { ResponseAlertManagerService } from '../../../../core/services/response-alert-manager.service';
+import { Country } from '../../../../core/models/country';
+import { map, Observable, of, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-planta',
@@ -14,11 +16,14 @@ import { ResponseAlertManagerService } from '../../../../core/services/response-
   templateUrl: './dialog-planta.component.html',
   styleUrl: './dialog-planta.component.scss'
 })
+
 export class DialogPlantaComponent implements OnInit {
   errorMessage: string = '';
   plantaForm: FormGroup;
   editMode: boolean = false;
-  elements: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  countries: Country[] = [];
+  filteredCountries!: Observable<Country[]>;
+
 
   constructor(
     private fb: FormBuilder,
@@ -29,7 +34,7 @@ export class DialogPlantaComponent implements OnInit {
   ) {
     this.plantaForm = this.fb.group({
       id: ['',],
-      pais: [''],
+      pais: ['',],
       nombre: [''],
       numeroLecturas: [''],
       numeroAlertasMedias: [''],
@@ -39,6 +44,12 @@ export class DialogPlantaComponent implements OnInit {
     
   }
 
+  private _filter(value: string): Country[] {
+    const filterValue = value.toLowerCase();
+
+    return this.countries.filter(country => country.name.toLowerCase().includes(filterValue));
+  }
+  
   ngOnInit(): void {
     this.editMode = this.data.editMode;
     this.applyValidators();
@@ -51,10 +62,25 @@ export class DialogPlantaComponent implements OnInit {
       this.plantaForm.reset();
       this.plantaForm.get('nombre')?.enable();
       this.plantaForm.get('pais')?.enable();
+      this.plantasService.getPaises().subscribe({
+        next: (response) => {
+          this.countries = response.data || [];
+          this.filteredCountries = of(this.countries);
+          this.filteredCountries = this.plantaForm.controls['pais'].valueChanges.pipe(
+            startWith(''),
+            map(value => this._filter(value || '')),
+          );
+        },
+        error: (error) => {
+          this.managerResponse.manageErrorResponseAlert(error);
+        }
+      });
     }
 
   }
   save(): void {
+    console.log(this.plantaForm.value);
+    
     if (this.plantaForm.valid) {
       let plantaSeleccionada:Planta = this.plantaForm.value;
       

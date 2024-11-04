@@ -8,7 +8,9 @@
     <mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="pais">
         <mat-header-cell *matHeaderCellDef mat-sort-header> País </mat-header-cell>
-        <mat-cell *matCellDef="let planta"> {{ planta.pais }} </mat-cell>
+        <mat-cell *matCellDef="let planta"> 
+          <img [src]="planta.pais.image" alt="{{planta.pais.code}}" width="30" style="margin-right: 8px;">
+          {{ planta.pais.name }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="nombre">

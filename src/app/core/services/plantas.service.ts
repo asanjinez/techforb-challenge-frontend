@@ -4,11 +4,13 @@ import { ApiResponse } from "../models/apiResponse";
 import { Planta } from "../models/planta";
 import { BehaviorSubject, Observable, tap } from "rxjs";
 import { enviroment } from "../../../enviroments";
+import { Country } from "../models/country";
 
 @Injectable({
     providedIn: 'root'
   })
   export class PlantasService{
+    private countriesUrl = enviroment.baseApiUrl + '/countries';
     private baseUrl = enviroment.baseApiUrl + '/plantas';
     constructor(private http: HttpClient) { }
 
@@ -77,5 +79,8 @@ import { enviroment } from "../../../enviroments";
             })
         );
     }
-      
+
+    getPaises(): Observable<ApiResponse<Country[]>> {
+        return this.http.get<ApiResponse<Country[]>>(this.countriesUrl);
+    }
   }
