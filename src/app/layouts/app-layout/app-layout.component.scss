@@ -1,8 +1,18 @@
-.toolbar-container {
+.mobile-toolbar {
     color: #C1C1C1;
     height: 64px;
     display: flex; 
     justify-content: space-between;
+  }
+
+  .desktop-toolbar {
+    display: none;
+    font-weight: 100;
+    background-color: transparent;
+    color: #C1C1C1;
+    height: 64px;
+    justify-content: end;
+    gap:30px;
   }
 
 mat-toolbar{
@@ -36,9 +46,12 @@ mat-sidenav-content{
     }
 }
 
-@media (min-width: 800px){
-    .toolbar-container{
+@media (min-width: 960px){
+    .mobile-toolbar{
         display: none;
+    }
+    .desktop-toolbar{
+        display:flex;
     }
   }
 

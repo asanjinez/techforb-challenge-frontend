@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AuthService } from '../../core/services/auth.service';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Usuario } from '../../core/models/usuario';
 
 @Component({
   selector: 'app-main-layout',
@@ -24,12 +25,12 @@ export class AppLayoutComponent implements AfterViewInit {
     { name: 'Plantas', fragment: 'plantas', 'icon':'villa' },
     { name: 'Parametros', fragment: 'parametros', 'icon':'wifi_tethering' },
   ];
-
+  userLogged:Usuario = this.authService.obtenerUsuario();
 
   constructor(private observer: BreakpointObserver, private authService: AuthService, private router:Router) {}
 
   ngAfterViewInit() {
-    this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
+    this.observer.observe(['(max-width: 960px)']).subscribe((screenSize) => {
       this.isMobile = screenSize.matches;
 
       if (this.isMobile) {

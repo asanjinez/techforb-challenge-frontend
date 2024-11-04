@@ -1,10 +1,18 @@
-<mat-toolbar class="toolbar-container">
-    <button mat-icon-button (click)="togleMenu()" aria-label="Open menu">
-        <mat-icon>landscape</mat-icon>
-    </button>
-    <mat-icon>person</mat-icon>
-    <mat-icon>notifications</mat-icon>
-  </mat-toolbar>
+<mat-toolbar class="mobile-toolbar">
+  <button mat-icon-button (click)="togleMenu()" aria-label="Open menu">
+      <mat-icon>landscape</mat-icon>
+  </button>
+  <mat-icon>person</mat-icon>
+  <mat-icon>notifications</mat-icon>
+</mat-toolbar>
+
+<mat-toolbar class="desktop-toolbar">
+  <mat-icon>language</mat-icon>
+  <mat-icon>settings</mat-icon>
+  <mat-icon>notifications</mat-icon>
+  {{userLogged.nombre + ' ' + userLogged.apellido}}
+  <mat-icon>person</mat-icon>
+</mat-toolbar>
   
     <mat-sidenav-container autosize="true" >
       <mat-sidenav [ngClass]="!navActivado ? 'expanded' : ''" [mode]="isMobile ? 'over' : 'side'" [disableClose]="isMobile ? 'false' : 'true'">
