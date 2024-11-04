@@ -8,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogPlantaComponent } from '../dialogs/dialog-planta/dialog-planta.component';
 import { DialogConfirmComponent } from '../dialogs/dialog-confirm/dialog-confirm.component';
+import { DialogParametrosComponent } from '../dialogs/dialog-parametros/dialog-parametros.component';
 
 @Component({
   selector: 'app-plantas',
@@ -71,6 +72,17 @@ export class PlantasComponent implements OnInit, AfterViewInit{
       data: {data: {}, editMode: false},
       autoFocus: true,
       hasBackdrop: true,
+    });
+  }
+
+  openParametrosDialog(planta: Planta): void {
+    this.dialog.open(DialogParametrosComponent,{
+      width: '720px',
+      height: '370px',
+      data: {data: planta},
+      autoFocus: true,
+      hasBackdrop: true,
+      panelClass: 'dialogContainer'
     });
   }
 }

@@ -39,6 +39,17 @@ import { enviroment } from "../../../enviroments";
     }
 
     createPlanta(planta: Planta): Observable<ApiResponse<Planta>> {
+        let randomParametros = {
+            temperatura: Math.random() * (100 - 1) + 1,
+            presion: Math.random() * (100 - 1) + 1,
+            viento: Math.random() * (100 - 1) + 1,
+            niveles: Math.random() * (100 - 1) + 1,
+            energia: Math.random() * (100 - 1) + 1,
+            tension: Math.random() * (100 - 1) + 1,
+            monoxido: Math.random() * (100 - 1) + 1,
+            gases: Math.random() * (100 - 1) + 1,
+        }
+        planta.parametros = randomParametros;
         return this.http.post<ApiResponse<Planta>>(this.baseUrl, planta)
           .pipe(
             tap(response => {
