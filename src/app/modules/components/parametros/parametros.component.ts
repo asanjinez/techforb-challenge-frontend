@@ -142,7 +142,6 @@ export class ParametrosComponent implements OnInit {
     } else {
       resultado.baja++;
     }
-    console.log("resultado" + JSON.stringify(resultado));
     return resultado;
   }
 }

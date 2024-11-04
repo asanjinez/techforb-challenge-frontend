@@ -70,7 +70,7 @@ export class LoginComponent {
   }
 
   usuarioTesting() {
-    this.authService.login({email: 'testing@test.com', password: '12345678'}).pipe(takeUntil(this.destroy$)).subscribe({
+    this.authService.login({email: '123@123', password: '12345678'}).pipe(takeUntil(this.destroy$)).subscribe({
       next: (response) => {
         this.responseAlertManager.manageSuccessResponseAlert(response);
       },
