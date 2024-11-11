@@ -1,5 +1,5 @@
 
-# Challenge Técnico - Backend
+# Challenge Técnico
 > [!NOTE]
 > Este repositorio contiene la implementación del challenge fullstack para una empresa, incluyendo tanto el desarrollo del frontend como del backend. A continuación, se detalla la arquitectura, funcionalidades, y tecnologías utilizadas en cada parte del proyecto.
 
@@ -92,13 +92,13 @@ La aplicación realiza una integración con la API de **RestCountries** para pro
 
 *Nota*: En la demo en vivo, algunos tiempos de espera pueden ocurrir debido a las limitaciones de versiones gratuitas.
 
----
-¡Gracias por revisar este proyecto!
-
-### Comparación entre algunos diseños en Figma vs implementación final
+### Comparación entre algunos diseños Figma y la implementación final
 
 | Diseño en Figma                                   | Implementación Final                               |
 |--------------------------------------------------|----------------------------------------------------|
 | <img src="src/assets/images/figma1.png" width="300px"> | <img src="src/assets/images/mio1.png" width="400px"> |
 | <img src="src/assets/images/figma2.png" width="300px"> | <img src="src/assets/images/mio2.png" width="400px"> |
 | <img src="src/assets/images/figma3.png" width="300px"> | <img src="src/assets/images/mio3.png" width="400px"> |
+
+---
+¡Gracias por revisar este proyecto!
